@@ -1,0 +1,13 @@
+{
+    "name": "apilabs",
+    "description": "Elegant and intuitive approach to RESTful API documentation.",
+    "version": "0.1.0",
+    "homepage": "http://www.totendev.com",
+    "author": "TotenDev",
+    "license": "MIT",
+    "devDependencies": {
+        "less": ">= 1.3.0",
+        "handlebars": ">= 0.x.x",
+        "coffescript": ">= 1.3.3"
+    }
+}

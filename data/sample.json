@@ -1,0 +1,155 @@
+{
+    "base": "http://mywebapp/api",
+    "user": "root",
+    "password": "123456",
+    "modules": [
+        {
+        "title": "Log Module",
+        "methods": [
+            {
+                "method": "GET",
+                "title": "/log",
+                "description": "List all log entries"
+            },
+            {
+                "method": "GET",
+                "title": "/log/{id}",
+                "description": "Find a specific log entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Log entry ID number"
+                    }
+                ]
+            },
+            {
+                "method": "POST",
+                "title": "/log",
+                "description": "Create a new log entry",
+                "parameters": [
+                    {
+                        "parameter": "title",
+                        "description": "Log entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "Log entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "Log contents"
+                    }
+                ]
+            },
+            {
+                "method": "PUT",
+                "title": "/log",
+                "description": "Update an existing log entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Log entry ID number"
+                    },
+                    {
+                        "parameter": "title",
+                        "description": "Log entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "Log entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "Log contents"
+                    }
+                ]
+            },
+            {
+                "method": "DELETE",
+                "title": "/log/{id}",
+                "description": "Remove an existing log entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Log entry ID number"
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "title": "User Module",
+        "methods": [
+            {
+                "method": "GET",
+                "title": "/user",
+                "description": "List all user entries"
+            },
+            {
+                "method": "GET",
+                "title": "/user/{id}",
+                "description": "Find a specific user entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "User entry ID number"
+                    }
+                ]
+            },
+            {
+                "method": "POST",
+                "title": "/user",
+                "description": "Create a new user entry",
+                "parameters": [
+                    {
+                        "parameter": "title",
+                        "description": "User entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "User entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "User contents"
+                    }
+                ]
+            },
+            {
+                "method": "PUT",
+                "title": "/user",
+                "description": "Update an existing user entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "User entry ID number"
+                    },
+                    {
+                        "parameter": "title",
+                        "description": "User entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "User entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "User contents"
+                    }
+                ]
+            },
+            {
+                "method": "DELETE",
+                "title": "/user/{id}",
+                "description": "Remove an existing user entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "User entry ID number"
+                    }
+                ]
+            }
+        ]
+        }
+    ]
+}

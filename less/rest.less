@@ -1,0 +1,52 @@
+.nav-rest {
+  .title {
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .desc {
+    font-size:12px;
+    float:right;
+    cursor:pointer;
+  }
+  .label {
+    margin-right:10px;
+    padding:4px 6px 4px 6px;
+    cursor:pointer;
+  }
+  .details {
+  margin:20px;
+  display:none;
+    h1 {
+      font-size:16px;
+    }
+    .table {
+      tbody tr:hover td,
+      tbody tr:hover th {
+        background-color: transparent;
+      }
+    }
+    .results {
+      margin-top:20px;
+      padding-top:10px;
+      border-top:1px solid #ddd;
+      display:none;
+    }
+  }
+}
+
+.get-tab {
+  background-color:lighten(@btnInfoBackground, 35%);
+}
+
+.post-tab {
+  background-color:lighten(@btnSuccessBackground, 35%);
+}
+
+.put-tab {
+  background-color:lighten(@btnWarningBackground, 30%);
+}
+
+.delete-tab {
+  background-color:lighten(@btnDangerBackground, 30%);
+}

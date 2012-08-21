@@ -1,0 +1,61 @@
+<div class="tab-content">
+{{#each modules}}
+<div class="tab-pane" id="{{getModuleId title}}">
+    <ul class="nav nav-tabs nav-stacked nav-rest">
+        {{#each methods}}
+        <li class="{{getTabClass method}}">
+            <div class="tab-header">
+                <span class="label {{getLabelClass method}}">{{method}}</span>
+                <span class="title">{{title}}</span>
+                <span class="desc">{{description}}</span>
+            </div>
+
+            <div class="details">
+                <p>{{description}}</p>
+
+                {{#if parameters}}
+                <h1>Parameters</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each parameters}}
+                        <tr>
+                            <td>{{parameter}}</td>
+                            <td><input type="text" id="{{parameter}}" class="requestParam" /></td>
+                            <td>{{description}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{/if}}
+
+                <input type="hidden" class="requestMethod" value="{{method}}" />
+                <input type="hidden" class="requestRoute" value="{{title}}" />
+                <button class="btn btn-small try-button"><i class="icon-share-alt"></i> Try this</button>
+
+                <div class="results">
+                    <h1>Request URL</h1>
+                    <pre class="request-url"></pre>
+
+                    <h1>Response Code</h1>
+                    <pre class="response-code"></pre>
+
+                    <h1>Response Body</h1>
+                    <pre class="response-body"></pre>
+
+                    <h1>Response Headers</h1>
+                    <pre class="response-headers"></pre>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+{{/each}}
+</div>

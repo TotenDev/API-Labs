@@ -1,0 +1,153 @@
+{
+    "base": "http://foobar/api",
+    "modules": [
+        {
+        "title": "Foo Module",
+        "methods": [
+            {
+                "method": "GET",
+                "title": "/foo",
+                "description": "List all foo entries"
+            },
+            {
+                "method": "GET",
+                "title": "/foo/{id}",
+                "description": "Find a specific foo entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Foo entry ID number"
+                    }
+                ]
+            },
+            {
+                "method": "POST",
+                "title": "/foo",
+                "description": "Create a new foo entry",
+                "parameters": [
+                    {
+                        "parameter": "title",
+                        "description": "Foo entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "Foo entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "Foo contents"
+                    }
+                ]
+            },
+            {
+                "method": "PUT",
+                "title": "/foo",
+                "description": "Update an existing foo entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Foo entry ID number"
+                    },
+                    {
+                        "parameter": "title",
+                        "description": "Foo entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "Foo entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "Foo contents"
+                    }
+                ]
+            },
+            {
+                "method": "DELETE",
+                "title": "/foo/{id}",
+                "description": "Remove an existing foo entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Foo entry ID number"
+                    }
+                ]
+            }
+        ]
+        },
+        {
+        "title": "Bar Module",
+        "methods": [
+            {
+                "method": "GET",
+                "title": "/bar",
+                "description": "List all bar entries"
+            },
+            {
+                "method": "GET",
+                "title": "/bar/{id}",
+                "description": "Find a specific bar entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Bar entry ID number"
+                    }
+                ]
+            },
+            {
+                "method": "POST",
+                "title": "/bar",
+                "description": "Create a new bar entry",
+                "parameters": [
+                    {
+                        "parameter": "title",
+                        "description": "Bar entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "Bar entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "Bar contents"
+                    }
+                ]
+            },
+            {
+                "method": "PUT",
+                "title": "/bar",
+                "description": "Update an existing bar entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Bar entry ID number"
+                    },
+                    {
+                        "parameter": "title",
+                        "description": "Bar entry title"
+                    },
+                    {
+                        "parameter": "date",
+                        "description": "Bar entry date"
+                    },
+                    {
+                        "parameter": "content",
+                        "description": "Bar contents"
+                    }
+                ]
+            },
+            {
+                "method": "DELETE",
+                "title": "/bar/{id}",
+                "description": "Remove an existing bar entry by ID",
+                "parameters": [
+                    {
+                        "parameter": "id",
+                        "description": "Bar entry ID number"
+                    }
+                ]
+            }
+        ]
+        }
+    ]
+}

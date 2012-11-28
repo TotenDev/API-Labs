@@ -1,0 +1,45 @@
+{
+    "base": "https://irc-man.com",
+    "user": "username",
+    "password": "password",
+    "modules": [
+        {
+            "title": "Channel Commands",
+            "methods": [
+                {
+                    "method": "POST",
+                    "title": "/postMessage/",
+                    "description": "Post a message on IRC",
+                    "parameters": [
+                        {
+                            "parameter": "body",
+                            "description": "Custom plain text body -- 'body=' is not required, it's a hack for apilabs...",
+                            "required": true,
+                            "format": "string",
+                            "example": "my long message on body :)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Channel List",
+            "methods": [
+                {
+                    "method": "POST",
+                    "title": "/list/",
+                    "description": "List channel messages in a range of date",
+                    "parameters": [
+                        {
+                            "parameter": "body",
+                            "description": "Custom JSON body -- 'body=' is not required, it's a hack for apilabs...",
+                            "required": true,
+                            "format": "string",
+                            "example": "{'startDate':'2012-11-11','endDate':'2012-12-12'}"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

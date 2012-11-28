@@ -5,6 +5,9 @@
     "homepage": "http://www.totendev.com",
     "author": "TotenDev",
     "license": "MIT",
+    "dependencies": {
+        "express": "3.x"
+    },
     "devDependencies": {
         "less": ">= 1.3.0",
         "handlebars": ">= 0.x.x",

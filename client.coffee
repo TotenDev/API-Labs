@@ -28,6 +28,7 @@ class Application
         $.getJSON @config, (contents) ->
             $(".docs-menu").html Handlebars.templates["menu-content"](contents)
             self.open(contents.default)
+            $("a[id='#{contents.default}']").parent().addClass('active')
 
     open: (data) ->
         $.getJSON 'data/' + data, (contents) ->
@@ -48,30 +49,25 @@ class Request
     send: ->
         self = this
         @element.find('.request-url').text(@url)
-        console.log @data
         response = $.ajax(
-            type: @method
-            url: @url
+            type: 'POST'
+            url: 'http://docs.office.totendev.com:8088/request'
             cache: false
-            data: @data
-            headers:
-                Authorization: @auth config.user, config.password
+            dataType: JSON
+            contentType: "application/json"
+            data: JSON.stringify(
+                method: @method
+                url: @url
+                parameters: @data
+                auth: "#{config.user}:#{config.password}"
+            )
         ).always((data, status) ->
-            self.receive response, data, status
+            response = JSON.parse(data.responseText)
+            self.element.find('.results').show()
+            self.element.find('.response-data').text("Returned status #{response.status} in #{response.time} seconds")
+            self.element.find('.response-body').text(response.body)
+            self.element.find('.response-headers').text(response.header)
         )
-
-    receive: (response, data, status) ->
-        @element.find('.results').show()
-        @element.find('.response-code').text "#{response.status} (#{response.statusText})"
-
-        data = data.responseText if status isnt "success"
-
-        @element.find('.response-body').text(JSON.stringify(data, null, 4))
-        @element.find('.response-headers').text(response.getAllResponseHeaders())
-
-    auth: (user, password) ->
-        hash = btoa "#{user}:#{password}"
-        "Basic #{hash}"
 
     getParameters: ->
         self = this
@@ -82,8 +78,8 @@ class Request
 
             if not name then return
 
-            if name is 'id' and self.url.match('{id}')
-                self.url = self.url.replace "{id}", value
+            if self.url.match("{#{name}}")
+                self.url = self.url.replace "{#{name}}", value
                 return
 
             self.data[name] = value
@@ -102,6 +98,9 @@ $ ->
 
     $(".doc-menu-item").live "click", ->
         app.open($(this).attr('id'))
+        $('.docs-menu li').each ->
+            $(this).removeClass('active')
+        $(this).parent().addClass('active')
 
     $(".try-button").live "click", ->
         element = $(this).parent()

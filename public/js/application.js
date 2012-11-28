@@ -1633,7 +1633,7 @@ function program2(depth0,data) {
   foundHelper = helpers.title;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.title; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" />\n                <button class=\"btn btn-small try-button\"><i class=\"icon-share-alt\"></i> Try this</button>\n\n                <div class=\"results\">\n                    <h1>Request URL</h1>\n                    <pre class=\"request-url\"></pre>\n\n                    <h1>Response Code</h1>\n                    <pre class=\"response-code\"></pre>\n\n                    <h1>Response Body</h1>\n                    <pre class=\"response-body\"></pre>\n\n                    <h1>Response Headers</h1>\n                    <pre class=\"response-headers\"></pre>\n                </div>\n            </div>\n        </li>\n        ";
+  buffer += escapeExpression(stack1) + "\" />\n                <button class=\"btn btn-small try-button\"><i class=\"icon-share-alt\"></i> Try this</button>\n\n                <div class=\"results\">\n                    <h1>Request URL</h1>\n                    <pre class=\"request-url\"></pre>\n\n                    <h1>Response Data</h1>\n                    <pre class=\"response-data\"></pre>\n\n                    <h1>Response Body</h1>\n                    <pre class=\"response-body\"></pre>\n\n                    <h1>Response Headers</h1>\n                    <pre class=\"response-headers\"></pre>\n                </div>\n            </div>\n        </li>\n        ";
   return buffer;}
 function program3(depth0,data) {
   
@@ -1651,16 +1651,32 @@ function program4(depth0,data) {
   foundHelper = helpers.parameter;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.parameter; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "</td>\n                            <td><input type=\"text\" id=\"";
+  buffer += escapeExpression(stack1) + " ";
+  stack1 = depth0.required;
+  stack1 = helpers['if'].call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(5, program5, data)});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</td>\n                            <td><input type=\"text\" id=\"";
   foundHelper = helpers.parameter;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.parameter; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
-  buffer += escapeExpression(stack1) + "\" class=\"requestParam\" /></td>\n                            <td>";
+  buffer += escapeExpression(stack1) + "\" class=\"requestParam\" value=\"";
+  foundHelper = helpers.example;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.example; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + " (";
+  foundHelper = helpers.format;
+  if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
+  else { stack1 = depth0.format; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
+  buffer += escapeExpression(stack1) + ")\" /></td>\n                            <td>";
   foundHelper = helpers.description;
   if (foundHelper) { stack1 = foundHelper.call(depth0, {hash:{}}); }
   else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1() : stack1; }
   buffer += escapeExpression(stack1) + "</td>\n                        </tr>\n                        ";
   return buffer;}
+function program5(depth0,data) {
+  
+  
+  return "<i class=\"icon-file icon-orange\" />";}
 
   buffer += "<div class=\"tab-content\">\n";
   stack1 = depth0.modules;
@@ -1733,7 +1749,8 @@ function program1(depth0,data) {
       self = this;
       $.getJSON(this.config, function(contents) {
         $(".docs-menu").html(Handlebars.templates["menu-content"](contents));
-        return self.open(contents["default"]);
+        self.open(contents["default"]);
+        return $("a[id='" + contents["default"] + "']").parent().addClass('active');
       });
     }
 
@@ -1768,34 +1785,25 @@ function program1(depth0,data) {
       var response, self;
       self = this;
       this.element.find('.request-url').text(this.url);
-      console.log(this.data);
       return response = $.ajax({
-        type: this.method,
-        url: this.url,
+        type: 'POST',
+        url: 'http://docs.office.totendev.com:8088/request',
         cache: false,
-        data: this.data,
-        headers: {
-          Authorization: this.auth(config.user, config.password)
-        }
+        dataType: JSON,
+        contentType: "application/json",
+        data: JSON.stringify({
+          method: this.method,
+          url: this.url,
+          parameters: this.data,
+          auth: "" + config.user + ":" + config.password
+        })
       }).always(function(data, status) {
-        return self.receive(response, data, status);
+        response = JSON.parse(data.responseText);
+        self.element.find('.results').show();
+        self.element.find('.response-data').text("Returned status " + response.status + " in " + response.time + " seconds");
+        self.element.find('.response-body').text(response.body);
+        return self.element.find('.response-headers').text(response.header);
       });
-    };
-
-    Request.prototype.receive = function(response, data, status) {
-      this.element.find('.results').show();
-      this.element.find('.response-code').text("" + response.status + " (" + response.statusText + ")");
-      if (status !== "success") {
-        data = data.responseText;
-      }
-      this.element.find('.response-body').text(JSON.stringify(data, null, 4));
-      return this.element.find('.response-headers').text(response.getAllResponseHeaders());
-    };
-
-    Request.prototype.auth = function(user, password) {
-      var hash;
-      hash = btoa("" + user + ":" + password);
-      return "Basic " + hash;
     };
 
     Request.prototype.getParameters = function() {
@@ -1809,8 +1817,8 @@ function program1(depth0,data) {
         if (!name) {
           return;
         }
-        if (name === 'id' && self.url.match('{id}')) {
-          self.url = self.url.replace("{id}", value);
+        if (self.url.match("{" + name + "}")) {
+          self.url = self.url.replace("{" + name + "}", value);
           return;
         }
         return self.data[name] = value;
@@ -1833,7 +1841,11 @@ function program1(depth0,data) {
       return $(this).parent().find(".details").toggle();
     });
     $(".doc-menu-item").live("click", function() {
-      return app.open($(this).attr('id'));
+      app.open($(this).attr('id'));
+      $('.docs-menu li').each(function() {
+        return $(this).removeClass('active');
+      });
+      return $(this).parent().addClass('active');
     });
     return $(".try-button").live("click", function() {
       var element, method, params, route;

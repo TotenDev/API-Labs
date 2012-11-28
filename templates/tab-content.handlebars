@@ -26,8 +26,8 @@
                     <tbody>
                         {{#each parameters}}
                         <tr>
-                            <td>{{parameter}}</td>
-                            <td><input type="text" id="{{parameter}}" class="requestParam" /></td>
+                            <td>{{parameter}} {{#if required}}<i class="icon-file icon-orange" />{{/if}}</td>
+                            <td><input type="text" id="{{parameter}}" class="requestParam" value="{{example}} ({{format}})" /></td>
                             <td>{{description}}</td>
                         </tr>
                         {{/each}}
@@ -43,8 +43,8 @@
                     <h1>Request URL</h1>
                     <pre class="request-url"></pre>
 
-                    <h1>Response Code</h1>
-                    <pre class="response-code"></pre>
+                    <h1>Response Data</h1>
+                    <pre class="response-data"></pre>
 
                     <h1>Response Body</h1>
                     <pre class="response-body"></pre>

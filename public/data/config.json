@@ -1,0 +1,14 @@
+{
+    "title": "API Documentation",
+    "default": "ditto.json",
+    "docs": [
+        {
+            "title": "Shortener API",
+            "data": "shortener.json"
+        },
+        {
+            "title": "IrcMan API",
+            "data": "ircMan.json"
+        }
+    ]
+}

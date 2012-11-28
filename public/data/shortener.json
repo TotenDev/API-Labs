@@ -1,0 +1,40 @@
+{
+    "base": "https://shortener.com",
+    "user": "name",
+    "password": "password",
+    "modules": [
+        {
+            "title": "Shortening",
+            "methods": [
+                {
+                    "method": "POST",
+                    "title": "/create/",
+                    "description": "Short an URL via POST",
+                    "parameters": [
+                        {
+                            "parameter": "link",
+                            "description": "A Long URL",
+                            "required": true,
+                            "format": "String",
+                            "example": "http://mylong.url/big/enough"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "title": "/create/{url}",
+                    "description": "Short an URL via GET",
+                    "parameters": [
+                        {
+                            "parameter": "url",
+                            "description": "A Long url",
+                            "required": true,
+                            "format": "String",
+                            "example": "http://mylong.url/bigger"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
